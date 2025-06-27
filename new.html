@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>유럽사 연표 (지역별 색상)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .country-box {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 0.8rem;
+            line-height: 1.2;
+            margin: 2px 2px 2px 0;
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+        @media (min-width: 640px) {
+            .country-box {
+                font-size: 0.875rem;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+
+<div class="container mx-auto p-4 sm:p-8">
+    <h1 class="text-2xl sm:text-4xl font-bold mb-4 text-center text-gray-800">유럽사 연표</h1>
+    <p class="text-center mb-6 text-gray-600">텍스트 내용을 기반으로 주요 사건과 모든 정치적 지도자를 정리한 표입니다.</p>
+    
+    <!-- 범례 추가 -->
+    <div class="mb-8 p-4 bg-white rounded-lg shadow text-center text-xs sm:text-sm">
+        <h3 class="font-bold mb-2 text-base">지역별 색상 범례</h3>
+        <div class="flex flex-wrap justify-center items-center gap-2">
+            <span class="country-box bg-amber-100 text-amber-800">고대(그리스/로마)</span>
+            <span class="country-box bg-blue-100 text-blue-800">서유럽(프랑스)</span>
+            <span class="country-box bg-sky-100 text-sky-800">서유럽(영국)</span>
+            <span class="country-box bg-orange-100 text-orange-800">남유럽(이베리아)</span>
+            <span class="country-box bg-red-100 text-red-800">남유럽(이탈리아)</span>
+            <span class="country-box bg-green-100 text-green-800">중부유럽</span>
+            <span class="country-box bg-purple-100 text-purple-800">동유럽(비잔티움)</span>
+            <span class="country-box bg-fuchsia-100 text-fuchsia-800">동유럽(러시아)</span>
+            <span class="country-box bg-stone-100 text-stone-800">아메리카</span>
+        </div>
+    </div>
+
+
+    <div class="overflow-x-auto">
+        <table class="min-w-full border-collapse border border-gray-300 bg-white shadow-lg">
+            <thead class="bg-gray-800 text-white">
+                <tr>
+                    <th class="border border-gray-300 p-3 text-sm sm:text-base">시대</th>
+                    <th class="border border-gray-300 p-3 text-sm sm:text-base">그리스 / 마케도니아</th>
+                    <th class="border border-gray-300 p-3 text-sm sm:text-base">로마</th>
+                    <th class="border border-gray-300 p-3 text-sm sm:text-base">서유럽 (프랑스, 영국 등)</th>
+                    <th class="border border-gray-300 p-3 text-sm sm:text-base">중·동유럽 (신성로마, 비잔티움, 러시아 등)</th>
+                    <th class="border border-gray-300 p-3 text-sm sm:text-base">아메리카</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- 고대 -->
+                <tr class="align-top">
+                    <td class="border border-gray-300 p-3 font-bold bg-gray-100 text-gray-700">고대<br>(~ 기원후 4세기)</td>
+                    <td class="border border-gray-300 p-3 text-sm">
+                        <ul class="list-disc pl-5 space-y-2">
+                            <li><strong>기원전 10세기경:</strong> <span class="country-box bg-amber-100 text-amber-800">그리스</span> 폴리스(도시 국가) 형성 (아크로폴리스, 아고라)</li>
+                            <li><strong>기원전 6세기 초:</strong> 아테네의 <strong>솔론</strong>이 금권정 개혁 추진</li>
+                            <li><strong>기원전 6세기 말:</strong> <strong>페이시스트라토스</strong> 참주 정치 이후, <strong>클레이스테네스</strong>가 민주 정치 기틀 마련 (500인 평의회, 도편 추방제)</li>
+                            <li><strong>기원전 5세기:</strong> <strong>페리클레스</strong> 시대, 아테네 민주 정치 전성기. 스파르타는 군국주의 체제 발전.</li>
+                            <li><strong>기원전 492-479:</strong> <span class="country-box bg-amber-100 text-amber-800">그리스</span>·페르시아 전쟁, <span class="country-box bg-amber-100 text-amber-800">그리스</span> 연합 승리.</li>
+                            <li><strong>기원전 431-404:</strong> 펠로폰네소스 전쟁, 스파르타 승리. <span class="country-box bg-amber-100 text-amber-800">그리스</span> 세계 쇠퇴.</li>
+                            <li><strong>기원전 338:</strong> <span class="country-box bg-amber-100 text-amber-800">마케도니아</span>의 <strong>필리포스 2세</strong>에게 정복됨.</li>
+                            <li><strong>기원전 334~:</strong> <strong>알렉산드로스</strong>의 동방 원정, 헬레니즘 제국 형성. 사후 제국 분열.</li>
+                        </ul>
+                    </td>
+                    <td class="border border-gray-300 p-3 text-sm">
+                        <ul class="list-disc pl-5 space-y-2">
+                            <li><strong>기원전 8세기 중엽:</strong> <span class="country-box bg-amber-100 text-amber-800">로마</span> 건국 (왕정)</li>
+                            <li><strong>기원전 6세기 말:</strong> 공화정 수립 (원로원, 집정관 중심).</li>
+                            <li><strong>~기원전 3세기:</strong> 평민권 신장 (호민관, 평민회, 12표법, 리키니우스법, 호르텐시우스법).</li>
+                            <li><strong>기원전 3세기:</strong> 포에니 전쟁 승리, 서지중해 장악.</li>
+                            <li><strong>기원전 2세기:</strong> 대농장(라티푼디움) 확산, 자영농 몰락. <strong>그라쿠스 형제</strong> 개혁 시도 실패. <strong>스파르타쿠스</strong>의 노예 반란.</li>
+                            <li><strong>기원전 1세기:</strong> 1차 삼두정치 (<strong>카이사르</strong>). <strong>카이사르</strong> 암살 후 2차 삼두정치. <strong>옥타비아누스</strong>가 <strong>안토니우스</strong> 격파 (악티움 해전, BC 31).</li>
+                            <li><strong>기원전 27~:</strong> <strong>옥타비아누스</strong>가 '<strong>아우구스투스</strong>' 칭호 획득, 제정 시작 ('로마의 평화').</li>
+                            <li><strong>기원후 3세기:</strong> 군인 황제 시대, 제국 위기. 콜로나투스 확산. <strong>베스파시아누스</strong> 황제 콜로세움 건설.</li>
+                            <li><strong>기원후 3세기 말:</strong> <strong>디오클레티아누스</strong> 황제, 4분할 통치(전제 군주제) 개혁.</li>
+                            <li><strong>기원후 4세기:</strong> <strong>콘스탄티누스</strong> 황제, 크리스트교 공인(밀라노 칙령 313), 니케아 공의회(325), 수도 이전. <strong>테오도시우스</strong> 황제, 크리스트교 국교화(392), 사후 제국 동서 분리(395).</li>
+                        </ul>
+                    </td>
+                    <td class="border border-gray-300 p-3 text-sm"></td>
+                    <td class="border border-gray-300 p-3 text-sm"></td>
+                    <td class="border border-gray-300 p-3 text-sm">
+                        <ul class="list-disc pl-5 space-y-2">
+                           <li>마야, 아스테카, 잉카 문명 발전.</li>
+                        </ul>
+                    </td>
+                </tr>
+                <!-- 중세 전기 -->
+                <tr class="align-top">
+                    <td class="border border-gray-300 p-3 font-bold bg-gray-100 text-gray-700">중세 전기<br>(5~11세기)</td>
+                    <td class="border border-gray-300 p-3 text-sm"></td>
+                    <td class="border border-gray-300 p-3 text-sm">
+                        <ul class="list-disc pl-5 space-y-2">
+                            <li><strong>476년:</strong> 서로마 제국 멸망 (게르만족 용병대장).</li>
+                        </ul>
+                    </td>
+                    <td class="border border-gray-300 p-3 text-sm">
+                        <ul class="list-disc pl-5 space-y-2">
+                            <li><strong>4세기 후반:</strong> 게르만족 대이동 시작.</li>
+                            <li><strong>5세기 말:</strong> <span class="country-box bg-blue-100 text-blue-800">프랑크 왕국</span>, <strong>클로비스</strong>가 메로베우스 왕조 개창 및 가톨릭 개종.</li>
+                            <li><strong>732년:</strong> 궁재 <strong>카롤루스 마르텔</strong>이 투르·푸아티에 전투에서 이슬람 격퇴.</li>
+                            <li><strong>8세기 중반:</strong> <strong>피핀</strong>이 카롤루스 왕조 개창. 교황령 기증.</li>
+                            <li><strong>800년:</strong> <strong>카롤루스 대제</strong>, 교황으로부터 서로마 황제 대관. 카롤루스 르네상스.</li>
+                            <li><strong>9세기:</strong> <span class="country-box bg-blue-100 text-blue-800">프랑크 왕국</span> 분열 (베르됭/메르센 조약) → <span class="country-box bg-blue-100 text-blue-800">프랑스</span>, <span class="country-box bg-red-100 text-red-800">이탈리아</span>, <span class="country-box bg-green-100 text-green-800">독일</span>의 기원. 노르만족 등 침입으로 봉건제 형성.</li>
+                            <li><strong><span class="country-box bg-blue-100 text-blue-800">프랑스</span>:</strong> <strong>위그 카페</strong>가 카페 왕조 개창, 지방 분권적.</li>
+                            <li><strong><span class="country-box bg-sky-100 text-sky-800">영국</span>:</strong> 노르망디 공 <strong>윌리엄</strong>이 <span class="country-box bg-sky-100 text-sky-800">영국</span> 정복 (1066), 노르만 왕조 개창. 강력한 왕권.</li>
+                        </ul>
+                    </td>
+                    <td class="border border-gray-300 p-3 text-sm">
+                        <ul class="list-disc pl-5 space-y-2">
+                            <li><strong><span class="country-box bg-purple-100 text-purple-800">비잔티움 제국</span>:</strong> <strong>6세기</strong>, <strong>유스티니아누스</strong> 황제 때 전성기 (영토 회복, 유스티니아누스 법전, 성 소피아 성당). 황제교황주의.</li>
+                            <li><strong>726년:</strong> 성상 파괴령으로 동서 교회 대립 격화.</li>
+                            <li><strong>962년:</strong> 동프랑크의 <strong>오토 1세</strong>, 교황으로부터 황제 대관. <span class="country-box bg-green-100 text-green-800">신성 로마 제국</span> 기원.</li>
+                            <li><strong>1054년:</strong> 동서 교회 분열 (로마 가톨릭 vs 그리스 정교).</li>
+                            <li><strong>11세기:</strong> 클뤼니 수도원 중심의 교회 개혁 운동. 교황 <strong>그레고리우스 7세</strong>와 <span class="country-box bg-green-100 text-green-800">신성로마황제</span> <strong>하인리히 4세</strong>의 서임권 투쟁 (카노사의 굴욕, 1077).</li>
+                        </ul>
+                    </td>
+                    <td class="border border-gray-300 p-3 text-sm"></td>
+                </tr>
+                <!-- 중세 후기 -->
+                <tr class="align-top">
+                    <td class="border border-gray-300 p-3 font-bold bg-gray-100 text-gray-700">중세 후기<br>(11~15세기)</td>
+                    <td class="border border-gray-300 p-3 text-sm"></td>
+                    <td class="border border-gray-300 p-3 text-sm"></td>
+                    <td class="border border-gray-300 p-3 text-sm">
+                        <ul class="list-disc pl-5 space-y-2">
+                            <li><strong>1096~:</strong> 십자군 전쟁 시작. 전쟁 실패로 교황권 쇠퇴, 왕권 강화, 도시 성장.</li>
+                            <li><strong>14세기 초:</strong> <span class="country-box bg-blue-100 text-blue-800">프랑스</span>왕 <strong>필리프 4세</strong>와 교황 <strong>보니파키우스 8세</strong> 대립 → 아비뇽 유수.</li>
+                            <li><strong>1337-1453:</strong> 백년 전쟁 (<span class="country-box bg-sky-100 text-sky-800">영국</span> vs <span class="country-box bg-blue-100 text-blue-800">프랑스</span>). <strong>잔 다르크</strong> 활약, <span class="country-box bg-blue-100 text-blue-800">프랑스</span> 승리 및 중앙집권화.</li>
+                            <li><strong>1455-1485:</strong> 장미 전쟁 (<span class="country-box bg-sky-100 text-sky-800">영국</span>). <strong>헨리 7세</strong>가 튜더 왕조 개창.</li>
+                            <li><strong><span class="country-box bg-sky-100 text-sky-800">영국</span>:</strong> <strong>존 왕</strong>, 대헌장(마그나 카르타) 승인(1215). 신분제 의회 발전.</li>
+                            <li><strong><span class="country-box bg-blue-100 text-blue-800">프랑스</span>:</strong> <strong>필리프 2세</strong> 왕권 강화, <strong>필리프 4세</strong> 삼부회 소집.</li>
+                            <li><strong>이베리아 반도:</strong> 재정복 운동으로 <span class="country-box bg-orange-100 text-orange-800">에스파냐</span>, <span class="country-box bg-orange-100 text-orange-800">포르투갈</span> 형성. <strong>1492년</strong> <span class="country-box bg-orange-100 text-orange-800">에스파냐</span> 통일.</li>
+                        </ul>
+                    </td>
+                    <td class="border border-gray-300 p-3 text-sm">
+                        <ul class="list-disc pl-5 space-y-2">
+                           <li><strong>1122년:</strong> 보름스 협약으로 서임권 투쟁 타결. 13세기 교황권 절정.</li>
+                           <li><strong>1378-1417:</strong> 교회의 대분열. <strong>위클리프</strong>, <strong>후스</strong>의 교회 개혁 주장.</li>
+                           <li><strong><span class="country-box bg-green-100 text-green-800">독일</span>:</strong> 대공위 시대, 황금문서(1356)로 7선제후가 황제 선출. 분열 심화.</li>
+                           <li><strong><span class="country-box bg-red-100 text-red-800">이탈리아</span>:</strong> 교황령, 도시 국가 등으로 분열.</li>
+                           <li><strong>1453년:</strong> <span class="country-box bg-purple-100 text-purple-800">비잔티움 제국</span>, 오스만 제국에 멸망.</li>
+                        </ul>
+                    </td>
+                    <td class="border border-gray-300 p-3 text-sm"></td>
+                </tr>
+                <!-- 근세 (르네상스, 종교개혁, 절대왕정) -->
+                <tr class="align-top">
+                    <td class="border border-gray-300 p-3 font-bold bg-gray-100 text-gray-700">근세<br>(15~18세기)</td>
+                    <td class="border border-gray-300 p-3 text-sm"></td>
+                    <td class="border border-gray-300 p-3 text-sm"></td>
+                    <td class="border border-gray-300 p-3 text-sm">
+                        <ul class="list-disc pl-5 space-y-2">
+                            <li><strong>15세기~:</strong> 신항로 개척 (<span class="country-box bg-orange-100 text-orange-800">포르투갈</span>, <span class="country-box bg-orange-100 text-orange-800">에스파냐</span> 주도). <strong>콜럼버스</strong>, <strong>바스쿠 다 가마</strong>, <strong>마젤란</strong>.</li>
+                            <li><strong>16세기~:</strong> 종교개혁 확산. <span class="country-box bg-blue-100 text-blue-800">프랑스</span> 위그노 전쟁 → <strong>앙리 4세</strong>, 낭트 칙령(1598). <span class="country-box bg-sky-100 text-sky-800">네덜란드</span> 독립전쟁.</li>
+                            <li><strong><span class="country-box bg-sky-100 text-sky-800">영국</span>:</strong> <strong>헨리 8세</strong>, 수장법(1534)으로 영국 국교회 성립. <strong>엘리자베스 1세</strong> 때 절대 왕정 전성기(무적함대 격파).</li>
+                            <li><strong><span class="country-box bg-blue-100 text-blue-800">프랑스</span>:</strong> <strong>앙리 4세</strong>가 절대왕정 기초 마련. <strong>루이 14세</strong>('태양왕')때 전성기, <strong>콜베르</strong> 등용, 베르사유 궁전 건설.</li>
+                            <li><strong><span class="country-box bg-orange-100 text-orange-800">에스파냐</span>:</strong> <strong>펠리페 2세</strong>, 레판토 해전 승리, <span class="country-box bg-orange-100 text-orange-800">포르투갈</span> 병합. 무적함대 패배 후 쇠퇴.</li>
+                        </ul>
+                    </td>
+                    <td class="border border-gray-300 p-3 text-sm">
+                        <ul class="list-disc pl-5 space-y-2">
+                            <li><strong>르네상스:</strong> <span class="country-box bg-red-100 text-red-800">이탈리아</span>(<strong>마키아벨리</strong>)에서 시작, 알프스 이북(<strong>에라스뮈스</strong>, <strong>토머스 모어</strong>)으로 확산.</li>
+                            <li><strong>종교개혁:</strong> <strong>1517년</strong>, <span class="country-box bg-green-100 text-green-800">독일</span> <strong>루터</strong>의 95개조 반박문. <span class="country-box bg-teal-100 text-teal-800">스위스</span> <strong>칼뱅</strong>의 예정설. 1555년 아우크스부르크 화의.</li>
+                            <li><strong>가톨릭 개혁:</strong> 트리엔트 공의회, <strong>로욜라</strong>의 예수회 창설.</li>
+                            <li><strong>1618-1648:</strong> 30년 전쟁(<span class="country-box bg-green-100 text-green-800">독일</span>). 베스트팔렌 조약으로 개인의 종교 자유 인정.</li>
+                            <li><strong><span class="country-box bg-green-100 text-green-800">프로이센</span>:</strong> <strong>프리드리히 2세</strong>, 계몽 전제 군주 자처('국가 제일의 공복').</li>
+                            <li><strong><span class="country-box bg-green-100 text-green-800">오스트리아</span>:</strong> <strong>요제프 2세</strong>, 계몽 전제 군주 자처.</li>
+                            <li><strong><span class="country-box bg-fuchsia-100 text-fuchsia-800">러시아</span>:</strong> <strong>표트르 대제</strong>의 서구화 정책. <strong>예카테리나 2세</strong>, 영토 확장.</li>
+                        </ul>
+                    </td>
+                    <td class="border border-gray-300 p-3 text-sm">
+                        <ul class="list-disc pl-5 space-y-2">
+                            <li><strong>1492년:</strong> <strong>콜럼버스</strong> <span class="country-box bg-stone-100 text-stone-800">아메리카</span> 도착. 이후 <span class="country-box bg-orange-100 text-orange-800">에스파냐</span>에 의해 아스테카, 잉카 제국 멸망.</li>
+                            <li>대서양 삼각무역 성립. 플랜테이션 농업, 노예 무역.</li>
+                            <li><strong>18세기:</strong> <span class="country-box bg-stone-100 text-stone-800">라틴 아메리카</span> 독립 운동 전개.</li>
+                        </ul>
+                    </td>
+                </tr>
+                <!-- 근대 (시민혁명, 산업혁명, 국민국가) -->
+                <tr class="align-top">
+                    <td class="border border-gray-300 p-3 font-bold bg-gray-100 text-gray-700">근대<br>(17~19세기)</td>
+                    <td class="border border-gray-300 p-3 text-sm">
+                        <ul class="list-disc pl-5 space-y-2">
+                           <li><strong>1829년:</strong> <span class="country-box bg-amber-100 text-amber-800">그리스</span>, 오스만 제국으로부터 독립.</li>
+                        </ul>
+                    </td>
+                    <td class="border border-gray-300 p-3 text-sm"></td>
+                    <td class="border border-gray-300 p-3 text-sm">
+                        <ul class="list-disc pl-5 space-y-2">
+                            <li><strong><span class="country-box bg-sky-100 text-sky-800">영국</span> 혁명:</strong>
+                                <ul class="list-disc pl-5 space-y-1 mt-1">
+                                    <li>- <strong>제임스 1세</strong>, <strong>찰스 1세</strong>의 전제정치 → 권리청원(1628).</li>
+                                    <li>- 청교도 혁명(1642): <strong>크롬웰</strong> 주도로 <strong>찰스 1세</strong> 처형, 공화정 수립.</li>
+                                    <li>- 왕정복고: <strong>찰스 2세</strong>, <strong>제임스 2세</strong>.</li>
+                                    <li>- 명예혁명(1688): <strong>메리</strong>와 <strong>윌리엄</strong> 공동왕 추대, 권리장전 승인(1689). 입헌군주제 확립.</li>
+                                    <li>- <strong>앤 여왕</strong>때 스코틀랜드 병합. <strong>조지 1세</strong>때 내각책임제 시작.</li>
+                                </ul>
+                            </li>
+                            <li><strong><span class="country-box bg-blue-100 text-blue-800">프랑스</span> 혁명:</strong>
+                                <ul class="list-disc pl-5 space-y-1 mt-1">
+                                    <li>- <strong>1789년</strong>, <strong>루이 16세</strong> 삼부회 소집. 제3신분 국민의회 결성, 바스티유 감옥 습격.</li>
+                                    <li>- 인권선언 발표, 공화정 선포, <strong>루이 16세</strong> 처형.</li>
+                                    <li>- <strong>로베스피에르</strong>의 공포정치 → 테르미도르 반동.</li>
+                                    <li>- <strong>나폴레옹</strong> 쿠데타(1799). 제1통령, 황제 즉위(1804). 나폴레옹 법전 편찬, 유럽 정복 전쟁.</li>
+                                    <li>- 빈 체제 수립 (<strong>메테르니히</strong> 주도).</li>
+                                    <li>- 7월 혁명(1830): <strong>샤를 10세</strong> 축출, <strong>루이 필리프</strong> 즉위.</li>
+                                    <li>- 2월 혁명(1848): <strong>루이 필리프</strong> 축출, 제2 공화정 수립.</li>
+                                    <li>- <strong>루이 나폴레옹</strong>, 대통령 당선 후 황제 즉위 (<strong>나폴레옹 3세</strong>). <span class="country-box bg-green-100 text-green-800">프로이센</span>과의 전쟁 패배로 몰락. 제3공화정 수립.</li>
+                                </ul>
+                            </li>
+                            <li><strong>19세기 <span class="country-box bg-sky-100 text-sky-800">영국</span>:</strong> 1차 선거법 개정(1832). 차티스트 운동. 자유주의적 개혁(곡물법, 항해법 폐지).</li>
+                            <li><strong>산업 혁명:</strong> 18세기 후반 <span class="country-box bg-sky-100 text-sky-800">영국</span>에서 시작. <strong>와트</strong>의 증기기관 개량, 공장제 기계 공업 발전. 19세기 전 유럽으로 확산.</li>
+                        </ul>
+                    </td>
+                    <td class="border border-gray-300 p-3 text-sm">
+                        <ul class="list-disc pl-5 space-y-2">
+                            <li><strong>17-18세기:</strong> 과학혁명과 계몽사상 (<strong>로크</strong>, <strong>루소</strong>, <strong>볼테르</strong>, <strong>몽테스키외</strong>) 확산.</li>
+                            <li><strong><span class="country-box bg-red-100 text-red-800">이탈리아</span> 통일:</strong> <strong>카보우르</strong> 재상의 주도, <strong>가리발디</strong>의 활약으로 통일 왕국 수립 (1861).</li>
+                            <li><strong><span class="country-box bg-green-100 text-green-800">독일</span> 통일:</strong> <span class="country-box bg-green-100 text-green-800">프로이센</span> 재상 <strong>비스마르크</strong>의 철혈 정책. <span class="country-box bg-blue-100 text-blue-800">프랑스</span>와의 전쟁 승리 후 <span class="country-box bg-green-100 text-green-800">독일</span> 제국 선포 (1871, 황제 <strong>빌헬름 1세</strong>).</li>
+                            <li><strong><span class="country-box bg-fuchsia-100 text-fuchsia-800">러시아</span>:</strong> 데카브리스트 봉기(1825) 실패. 크림전쟁 패배. <strong>알렉산드르 2세</strong>, 농노 해방령(1861). '브나로드' 운동. <strong>알렉산드르 2세</strong> 암살.</li>
+                        </ul>
+                    </td>
+                    <td class="border border-gray-300 p-3 text-sm">
+                        <ul class="list-disc pl-5 space-y-2">
+                           <li><strong>1776년:</strong> <span class="country-box bg-stone-100 text-stone-800">미국</span> 독립선언 (<strong>워싱턴</strong> 총사령관). <span class="country-box bg-blue-100 text-blue-800">프랑스</span> 등 지원으로 독립전쟁 승리(1783).</li>
+                           <li>세계 최초의 민주 공화국(<span class="country-box bg-stone-100 text-stone-800">미합중국</span>) 탄생. <strong>워싱턴</strong> 초대 대통령.</li>
+                           <li><strong>19세기:</strong> 남북부 대립 격화. <strong>링컨</strong> 대통령 당선 후 남북전쟁(1861-1865). 북부 승리, 노예해방.</li>
+                           <li>대륙 횡단 철도 개통(1869), 산업화 촉진, 강대국으로 성장.</li>
+                           <li><span class="country-box bg-stone-100 text-stone-800">라틴아메리카</span> 각국, <strong>볼리바르</strong>, <strong>산마르틴</strong> 등의 활약으로 독립.</li>
+                        </ul>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+</div>
+
+</body>
+</html>
