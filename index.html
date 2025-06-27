@@ -3,9 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>유럽사 연표 (지역별 색상)</title>
+    <title>유럽사 연표 (Interactive)</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
+        /* 페이지 내용 스타일 */
         .country-box {
             display: inline-block;
             padding: 2px 8px;
@@ -15,33 +16,107 @@
             line-height: 1.2;
             margin: 2px 2px 2px 0;
             border: 1px solid rgba(0,0,0,0.05);
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .country-box:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
         @media (min-width: 640px) {
             .country-box {
                 font-size: 0.875rem;
             }
         }
+        .toggle-icon {
+            cursor: pointer;
+            display: inline-block;
+            margin-right: 8px;
+            width: 1.2rem;
+            text-align: center;
+        }
+        .highlight {
+            background-color: #fef08a;
+            border-radius: 2px;
+            padding: 0 2px;
+        }
+        .filter-highlight {
+            border-radius: 6px;
+            padding: 4px 8px;
+            margin: -4px -8px;
+            transition: background-color 0.3s ease;
+        }
+
+        /* --- 비밀번호 입력 화면 스타일 --- */
+        #password-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(31, 41, 55, 0.95); /* bg-gray-800 with opacity */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            backdrop-filter: blur(5px);
+        }
     </style>
 </head>
 <body class="bg-gray-50">
 
-<div class="container mx-auto p-4 sm:p-8">
+<!-- ==================================== -->
+<!--         비밀번호 입력 화면            -->
+<!-- ==================================== -->
+<div id="password-overlay">
+    <div class="bg-white p-8 rounded-lg shadow-xl text-center w-11/12 max-w-sm">
+        <h2 class="text-2xl font-bold mb-4 text-gray-800">인증 필요</h2>
+        <p class="text-gray-600 mb-6">계속하려면 비밀번호를 입력하세요.</p>
+        <input type="password" id="password-input" placeholder="비밀번호" class="w-full p-3 border border-gray-300 rounded-md text-center focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
+        <button id="submit-button" class="w-full mt-4 px-4 py-3 bg-indigo-600 text-white font-semibold rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+            입장
+        </button>
+        <p id="error-message" class="text-red-500 text-sm mt-3 h-4"></p>
+    </div>
+</div>
+
+
+<!-- ==================================== -->
+<!--          기존 페이지 내용             -->
+<!-- ==================================== -->
+<div id="main-content" class="container mx-auto p-4 sm:p-8" style="display: none;">
     <h1 class="text-2xl sm:text-4xl font-bold mb-4 text-center text-gray-800">유럽사 연표</h1>
     <p class="text-center mb-6 text-gray-600">텍스트 내용을 기반으로 주요 사건과 모든 정치적 지도자를 정리한 표입니다.</p>
     
-    <!-- 범례 추가 -->
-    <div class="mb-8 p-4 bg-white rounded-lg shadow text-center text-xs sm:text-sm">
-        <h3 class="font-bold mb-2 text-base">지역별 색상 범례</h3>
-        <div class="flex flex-wrap justify-center items-center gap-2">
-            <span class="country-box bg-amber-100 text-amber-800">고대(그리스/로마)</span>
-            <span class="country-box bg-blue-100 text-blue-800">서유럽(프랑스)</span>
-            <span class="country-box bg-sky-100 text-sky-800">서유럽(영국)</span>
-            <span class="country-box bg-orange-100 text-orange-800">남유럽(이베리아)</span>
-            <span class="country-box bg-red-100 text-red-800">남유럽(이탈리아)</span>
-            <span class="country-box bg-green-100 text-green-800">중부유럽</span>
-            <span class="country-box bg-purple-100 text-purple-800">동유럽(비잔티움)</span>
-            <span class="country-box bg-fuchsia-100 text-fuchsia-800">동유럽(러시아)</span>
-            <span class="country-box bg-stone-100 text-stone-800">아메리카</span>
+    <!-- 컨트롤 패널 -->
+    <div class="mb-8 p-4 bg-white rounded-lg shadow-md space-y-4">
+        <!-- 검색 기능 -->
+        <div>
+            <label for="search-input" class="block text-sm font-medium text-gray-700 mb-1">검색</label>
+            <input type="text" id="search-input" placeholder="키워드 입력 (예: 나폴레옹, 혁명)" class="w-full p-2 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500">
+        </div>
+
+        <!-- 국가별 내용 강조 -->
+        <div>
+            <h3 class="block text-sm font-medium text-gray-700 mb-2">국가/지역별 내용 강조</h3>
+            <div id="filter-buttons" class="flex flex-wrap items-center gap-2">
+                <button data-filter="그리스" class="country-box bg-amber-100 text-amber-800">그리스</button>
+                <button data-filter="로마" class="country-box bg-amber-100 text-amber-800">로마</button>
+                <button data-filter="프랑스" class="country-box bg-blue-100 text-blue-800">프랑스</button>
+                <button data-filter="영국" class="country-box bg-sky-100 text-sky-800">영국</button>
+                <button data-filter="에스파냐" class="country-box bg-orange-100 text-orange-800">에스파냐</button>
+                <button data-filter="이탈리아" class="country-box bg-red-100 text-red-800">이탈리아</button>
+                <button data-filter="독일" class="country-box bg-green-100 text-green-800">독일</button>
+                <button data-filter="러시아" class="country-box bg-fuchsia-100 text-fuchsia-800">러시아</button>
+                <button data-filter="미국" class="country-box bg-stone-100 text-stone-800">미국</button>
+            </div>
+        </div>
+        
+        <!-- 초기화 버튼 -->
+        <div>
+            <button id="reset-button" class="w-full mt-2 px-4 py-2 bg-gray-600 text-white font-semibold rounded-md hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
+                강조 및 검색 초기화
+            </button>
         </div>
     </div>
 
@@ -50,18 +125,20 @@
         <table class="min-w-full border-collapse border border-gray-300 bg-white shadow-lg">
             <thead class="bg-gray-800 text-white">
                 <tr>
-                    <th class="border border-gray-300 p-3 text-sm sm:text-base">시대</th>
-                    <th class="border border-gray-300 p-3 text-sm sm:text-base">그리스 / 마케도니아</th>
-                    <th class="border border-gray-300 p-3 text-sm sm:text-base">로마</th>
-                    <th class="border border-gray-300 p-3 text-sm sm:text-base">서유럽 (프랑스, 영국 등)</th>
-                    <th class="border border-gray-300 p-3 text-sm sm:text-base">중·동유럽 (신성로마, 비잔티움, 러시아 등)</th>
-                    <th class="border border-gray-300 p-3 text-sm sm:text-base">아메리카</th>
+                    <th class="border border-gray-300 p-3 text-sm sm:text-base w-[16%]">시대</th>
+                    <th class="border border-gray-300 p-3 text-sm sm:text-base w-[16%]">그리스 / 마케도니아</th>
+                    <th class="border border-gray-300 p-3 text-sm sm:text-base w-[16%]">로마</th>
+                    <th class="border border-gray-300 p-3 text-sm sm:text-base w-[16%]">서유럽 (프랑스, 영국 등)</th>
+                    <th class="border border-gray-300 p-3 text-sm sm:text-base w-[16%]">중·동유럽 (신성로마, 비잔티움, 러시아 등)</th>
+                    <th class="border border-gray-300 p-3 text-sm sm:text-base w-[16%]">아메리카</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody id="timeline-body">
                 <!-- 고대 -->
-                <tr class="align-top">
-                    <td class="border border-gray-300 p-3 font-bold bg-gray-100 text-gray-700">고대<br>(~ 기원후 4세기)</td>
+                <tr class="align-top epoch-content">
+                    <td class="border border-gray-300 p-3 font-bold bg-gray-100 text-gray-700">
+                        <span class="toggle-icon">▼</span>고대<br>(~ 기원후 4세기)
+                    </td>
                     <td class="border border-gray-300 p-3 text-sm">
                         <ul class="list-disc pl-5 space-y-2">
                             <li><strong>기원전 10세기경:</strong> <span class="country-box bg-amber-100 text-amber-800">그리스</span> 폴리스(도시 국가) 형성 (아크로폴리스, 아고라)</li>
@@ -97,8 +174,10 @@
                     </td>
                 </tr>
                 <!-- 중세 전기 -->
-                <tr class="align-top">
-                    <td class="border border-gray-300 p-3 font-bold bg-gray-100 text-gray-700">중세 전기<br>(5~11세기)</td>
+                <tr class="align-top epoch-content">
+                    <td class="border border-gray-300 p-3 font-bold bg-gray-100 text-gray-700">
+                        <span class="toggle-icon">▼</span>중세 전기<br>(5~11세기)
+                    </td>
                     <td class="border border-gray-300 p-3 text-sm"></td>
                     <td class="border border-gray-300 p-3 text-sm">
                         <ul class="list-disc pl-5 space-y-2">
@@ -129,8 +208,10 @@
                     <td class="border border-gray-300 p-3 text-sm"></td>
                 </tr>
                 <!-- 중세 후기 -->
-                <tr class="align-top">
-                    <td class="border border-gray-300 p-3 font-bold bg-gray-100 text-gray-700">중세 후기<br>(11~15세기)</td>
+                <tr class="align-top epoch-content">
+                    <td class="border border-gray-300 p-3 font-bold bg-gray-100 text-gray-700">
+                        <span class="toggle-icon">▼</span>중세 후기<br>(11~15세기)
+                    </td>
                     <td class="border border-gray-300 p-3 text-sm"></td>
                     <td class="border border-gray-300 p-3 text-sm"></td>
                     <td class="border border-gray-300 p-3 text-sm">
@@ -156,8 +237,10 @@
                     <td class="border border-gray-300 p-3 text-sm"></td>
                 </tr>
                 <!-- 근세 (르네상스, 종교개혁, 절대왕정) -->
-                <tr class="align-top">
-                    <td class="border border-gray-300 p-3 font-bold bg-gray-100 text-gray-700">근세<br>(15~18세기)</td>
+                <tr class="align-top epoch-content">
+                    <td class="border border-gray-300 p-3 font-bold bg-gray-100 text-gray-700">
+                        <span class="toggle-icon">▼</span>근세<br>(15~18세기)
+                    </td>
                     <td class="border border-gray-300 p-3 text-sm"></td>
                     <td class="border border-gray-300 p-3 text-sm"></td>
                     <td class="border border-gray-300 p-3 text-sm">
@@ -189,8 +272,10 @@
                     </td>
                 </tr>
                 <!-- 근대 (시민혁명, 산업혁명, 국민국가) -->
-                <tr class="align-top">
-                    <td class="border border-gray-300 p-3 font-bold bg-gray-100 text-gray-700">근대<br>(17~19세기)</td>
+                <tr class="align-top epoch-content">
+                    <td class="border border-gray-300 p-3 font-bold bg-gray-100 text-gray-700">
+                        <span class="toggle-icon">▼</span>근대<br>(17~19세기)
+                    </td>
                     <td class="border border-gray-300 p-3 text-sm">
                         <ul class="list-disc pl-5 space-y-2">
                            <li><strong>1829년:</strong> <span class="country-box bg-amber-100 text-amber-800">그리스</span>, 오스만 제국으로부터 독립.</li>
@@ -245,8 +330,206 @@
             </tbody>
         </table>
     </div>
-
 </div>
+
+
+<!-- ==================================== -->
+<!--         비밀번호 확인 스크립트         -->
+<!-- ==================================== -->
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    // 비밀번호 관련 요소
+    const verificationToken = 'Y2FoczE5MDh+'; // 'cahs1908~'를 Base64로 인코딩한 값
+    const overlay = document.getElementById('password-overlay');
+    const mainContent = document.getElementById('main-content');
+    const passwordInput = document.getElementById('password-input');
+    const submitButton = document.getElementById('submit-button');
+    const errorMessage = document.getElementById('error-message');
+
+    function checkAccess() {
+        const userInput = passwordInput.value;
+        // 사용자 입력값을 Base64로 인코딩하여 저장된 값과 비교
+        if (btoa(userInput) === verificationToken) {
+            overlay.style.display = 'none';
+            mainContent.style.display = 'block';
+        } else {
+            errorMessage.textContent = '비밀번호가 올바르지 않습니다.';
+            passwordInput.value = '';
+            // 입력창을 흔드는 효과
+            passwordInput.classList.add('animate-shake');
+            setTimeout(() => {
+                passwordInput.classList.remove('animate-shake');
+                errorMessage.textContent = '';
+            }, 1000);
+        }
+    }
+
+    // 버튼 클릭 시 확인
+    submitButton.addEventListener('click', checkAccess);
+
+    // Enter 키 입력 시 확인
+    passwordInput.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter') {
+            checkAccess();
+        }
+    });
+
+    // 입력창에 포커스
+    passwordInput.focus();
+
+    // 입력창 흔들기 애니메이션을 위한 Tailwind CSS JIT 클래스
+    const style = document.createElement('style');
+    style.innerHTML = `
+      @keyframes shake {
+        0%, 100% { transform: translateX(0); }
+        10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+        20%, 40%, 60%, 80% { transform: translateX(5px); }
+      }
+      .animate-shake {
+        animation: shake 0.5s ease-in-out;
+      }
+    `;
+    document.head.appendChild(style);
+});
+</script>
+
+
+<!-- ==================================== -->
+<!--         기존 페이지 기능 스크립트       -->
+<!-- ==================================== -->
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const searchInput = document.getElementById('search-input');
+    const filterButtons = document.querySelectorAll('#filter-buttons button');
+    const resetButton = document.getElementById('reset-button');
+    const timelineBody = document.getElementById('timeline-body');
+    const epochRows = timelineBody.querySelectorAll('.epoch-content');
+
+    const originalCellHTMLs = new Map();
+    timelineBody.querySelectorAll('td').forEach(cell => {
+        originalCellHTMLs.set(cell, cell.innerHTML);
+    });
+
+    // 국가별 하이라이트 색상 맵
+    const colorMap = {
+        '그리스': ['bg-amber-400', 'text-black'],
+        '로마': ['bg-amber-400', 'text-black'],
+        '프랑스': ['bg-blue-600', 'text-white'],
+        '영국': ['bg-sky-500', 'text-white'],
+        '에스파냐': ['bg-orange-500', 'text-white'],
+        '이탈리아': ['bg-red-600', 'text-white'],
+        '독일': ['bg-green-600', 'text-white'],
+        '프로이센': ['bg-green-600', 'text-white'],
+        '러시아': ['bg-fuchsia-600', 'text-white'],
+        '미국': ['bg-stone-500', 'text-white']
+    };
+
+    // 국가별 그룹/별칭 정의
+    const countryGroups = {
+        '프랑스': ['프랑스', '프랑크 왕국', '카롤루스', '피핀'],
+        '독일': ['독일', '프로이센', '신성 로마', '동프랑크', '신성로마'],
+        '프로이센': ['프로이센', '독일'], // 프로이센 클릭 시 독일 통일 관련 내용도 포함
+        '미국': ['미국', '미합중국'],
+    };
+    
+    // 1. 시대별 펼치기/접기 기능
+    epochRows.forEach(row => {
+        const toggleCell = row.firstElementChild;
+        const toggleIcon = toggleCell.querySelector('.toggle-icon');
+        
+        toggleCell.style.cursor = 'pointer';
+        toggleCell.addEventListener('click', () => {
+            const isHidden = toggleIcon.textContent === '▶';
+            const cells = Array.from(row.children).slice(1);
+
+            if (isHidden) { // 펼치기
+                cells.forEach(cell => cell.classList.remove('hidden'));
+                toggleIcon.textContent = '▼';
+            } else { // 접기
+                cells.forEach(cell => cell.classList.add('hidden'));
+                toggleIcon.textContent = '▶';
+            }
+        });
+    });
+
+    function unhighlightSearch() {
+        timelineBody.querySelectorAll('td').forEach(cell => {
+            if (originalCellHTMLs.has(cell)) {
+                cell.innerHTML = originalCellHTMLs.get(cell);
+            }
+        });
+    }
+
+    // 2. 검색 기능
+    searchInput.addEventListener('input', () => {
+        const searchTerm = searchInput.value.trim().toLowerCase();
+        unhighlightSearch();
+        if (searchTerm.length === 0) return;
+        
+        const regex = new RegExp(searchTerm.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&'), 'gi');
+        
+        timelineBody.querySelectorAll('td').forEach(cell => {
+            const originalHTML = originalCellHTMLs.get(cell);
+            if (originalHTML && originalHTML.toLowerCase().includes(searchTerm)) {
+                 const newHTML = originalHTML.replace(regex, match => `<span class="highlight">${match}</span>`);
+                 if (newHTML !== originalHTML) {
+                    cell.innerHTML = newHTML;
+                 }
+            }
+        });
+    });
+
+    function unhighlightFilter() {
+        const highlightedItems = timelineBody.querySelectorAll('.filter-highlight');
+        highlightedItems.forEach(li => {
+            li.classList.remove('filter-highlight');
+            Object.values(colorMap).flat().forEach(className => {
+                li.classList.remove(className);
+            });
+        });
+    }
+
+    // 3. 국가별 강조 기능 (개선된 로직)
+    filterButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            const filterKey = button.dataset.filter;
+            unhighlightFilter(); 
+            
+            // 그룹에 정의된 이름들을 가져오거나, 없으면 필터 키 자체를 배열로 사용
+            const termsToHighlight = countryGroups[filterKey] || [filterKey];
+            const highlightClasses = colorMap[filterKey] || [];
+            if (highlightClasses.length === 0) return;
+
+            timelineBody.querySelectorAll('li').forEach(li => {
+                const textContent = li.textContent || li.innerText;
+                
+                // termsToHighlight 배열의 이름 중 하나라도 포함하는지 확인
+                const shouldHighlight = termsToHighlight.some(term => textContent.includes(term));
+
+                if (shouldHighlight) {
+                    li.classList.add('filter-highlight', ...highlightClasses);
+                }
+            });
+        });
+    });
+
+    // 4. 초기화 기능
+    resetButton.addEventListener('click', () => {
+        searchInput.value = '';
+        unhighlightSearch();
+        unhighlightFilter();
+        
+        epochRows.forEach(row => {
+            const toggleIcon = row.querySelector('.toggle-icon');
+            if (toggleIcon.textContent === '▶') {
+                const cells = Array.from(row.children).slice(1);
+                cells.forEach(cell => cell.classList.remove('hidden'));
+                toggleIcon.textContent = '▼';
+            }
+        });
+    });
+});
+</script>
 
 </body>
 </html>
